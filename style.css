@@ -347,7 +347,7 @@ header {
 .loc1 {
   display: block;
   float: right;
-  width: 40%; 
+  width: 45%;
   margin-top: 40px;
   font-size: 31px;
   line-height: 44px;
@@ -355,19 +355,19 @@ header {
   text-transform: uppercase;
 }
 
-#zal1 {
+#bl1 {
   border-radius: 10px;
   width: 500px;
 }
-#zal2 {
+#bl2 {
   border-radius: 10px;
   width: 500px;
 }
-#zal3 {
+#bl3 {
   border-radius: 10px;
   width: 500px;
 }
-#zal4 {
+#bl4 {
   border-radius: 10px;
   width: 500px;
 }
@@ -392,7 +392,7 @@ input[type=button1] {
   box-shadow: inset 0px 5px 5px rgba(212, 130, 130, 0.25);
   border-radius: 10px;
   cursor: pointer;
-  left: 1090px;
+  left: 910px;
   top: 260px;
   box-shadow: 0 1px 10px #98AD4C;
 }
@@ -442,7 +442,7 @@ input[type=button3] {
   box-shadow: inset 0px 5px 5px rgba(212, 130, 130, 0.25);
   border-radius: 10px;
   cursor: pointer;
-  left: 1110px;
+  left: 1050px;
   top: 0;
   box-shadow: 0 1px 10px #98AD4C;
 }
@@ -475,7 +475,7 @@ input[type=button4] {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 19px;
   width: 42%;
-  padding-left: 930px;
+  padding-left: 750px;
   padding-top: 100px;
   text-align: center;
 }
@@ -488,7 +488,7 @@ input[type=button4] {
   position: absolute;
   width: 203px;
   height: 53px;
-  left: 1090px;
+  left: 910px;
     
   top: 260px;
   cursor: pointer;
@@ -827,7 +827,7 @@ figure {
 position: absolute;
   /* width: 551px; */
   /* height: 46px; */
-left: 720px;
+left: 610px;
 top: 3500px;
 font-size: 40px;
 line-height: 47px;
@@ -939,12 +939,12 @@ footer {
   font-size: 17px;
 }
 h6 {
-  font-size: 21px;
-  margin-left: 50px;
+  font-size: 20px;
+  margin-left: 90px;
   margin-bottom: 10px;
 }
 #nam {
-  margin-left: 13px;
+  margin-left: 4px;
 }
 #telef {
   margin-left: 17px;
@@ -968,7 +968,7 @@ input:focus {
   box-shadow: 0 1px 10px #DFE1DC;
 }
 #submit {
-  color: #151E1E;
+  color: #4f5c1e;
   font-family: 'Roboto Slab', serif;
   margin-top: 20px;
   cursor: pointer;
@@ -1005,7 +1005,7 @@ span {
 .main_content {
   background-image: url(imag/Flowers-bouquet-white-background.png);
   background-repeat: no-repeat;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto Slab', serif;
   font-size: 17px;
   margin-left: 30px;
   border: 3px solid #DFE1DC;
@@ -1014,6 +1014,7 @@ span {
   margin-right: 430px;
 }
 .zagolovok {
+  font-family: 'Roboto Slab', serif;
   font-size: 30px;
   margin-left: 30px;
 }

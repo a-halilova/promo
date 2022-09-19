@@ -1,47 +1,17 @@
-//логотип
-var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
-function initLog() {
-	canvas = document.getElementById("canvas1");
-	anim_container = document.getElementById("animation_container1");
-	dom_overlay_container = document.getElementById("dom_overlay_container1");
-	var comp=AdobeAn.getComposition("4E8FC9893DD8D048AEDE48B97339A37E");
-	var lib=comp.getLibrary();
-	var loader = new createjs.LoadQueue(false);
-	loader.addEventListener("fileload", function(evt){handleFileLoadLog(evt,comp)});
-	loader.addEventListener("complete", function(evt){handleCompleteLog(evt,comp)});
-	var lib=comp.getLibrary();
-	loader.loadManifest(lib.properties.manifest);
-}
-function handleFileLoadLog(evt, comp) {
-	var images=comp.getImages();	
-	if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }	
-}
-function handleCompleteLog(evt,comp) {
-	//This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
-	var lib=comp.getLibrary();
-	var ss=comp.getSpriteSheet();
-	var queue = evt.target;
-	var ssMetadata = lib.ssMetadata;
-	for(i=0; i<ssMetadata.length; i++) {
-		ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
-	}
-	exportRoot = new lib.Logo();
-	stage = new lib.Stage(canvas);	
-	//Registers the "tick" event listener.
-	fnStartAnimation = function() {
-		stage.addChild(exportRoot);
-		createjs.Ticker.framerate = lib.properties.fps;
-		createjs.Ticker.addEventListener("tick", stage);
-	}	    
-	//Code to support hidpi screens and responsive scaling.
-	AdobeAn.makeResponsive(false,'both',false,1,[canvas,anim_container,dom_overlay_container]);	
-	AdobeAn.compositionLoaded(lib.properties.id);
-	fnStartAnimation();
-}
-window.onload = initLog();
-
-// о студии
-
+//Preloader
+function loadData() {
+	return new Promise((resolve, reject) => {
+	  setTimeout(resolve, 3000);
+	})
+  }
+  loadData()
+  .then(() => {
+	let preloader = document.getElementById('preloaderContainer');
+	preloader.classList.add('hidden');
+	preloader.classList.remove('visible');
+	});
+  
+// о магазине (2 страница)
 function studija() {
  window.location = "text.html";
 }
@@ -49,19 +19,15 @@ function studija() {
 //Слайдер
 let links = document.querySelectorAll(".itemLinks");
 let wrapper = document.querySelector("#wrapper");
-
 // activeLink обеспечивает метку для активного элемента
 let activeLink = 0;
-
 // устанавливаем отслеживание событий
 for (let i = 0; i < links.length; i++) {
   let link = links[i];
   link.addEventListener('click', setClickedItem, false);
-
 // определяем элемент для activeLink
   link.itemID = i;
 }
-
 // устанавливаем первый элемент в качестве активного
 links[activeLink].classList.add("active");
 
@@ -77,9 +43,7 @@ function removeActiveLinks() {
   	links[i].classList.remove("active");
   }
 }
-
-// Обработчик изменяет позицию слайдера, после того, как мы убедились,
-// что в качестве активной обозначена нужная нам ссылка.
+// Обработчик изменяет позицию слайдера, после того, как мы убедились, что в качестве активной обозначена нужная нам ссылка.
 function changePosition(link) {
   link.classList.add("active");
   let position = link.getAttribute("data-pos");
@@ -105,13 +69,14 @@ function goToNextItem() {
   let newLink = links[activeLink];
   changePosition(newLink);
 }
-//обработка замены фото (блок наши услуги)
+
+//Обработка замены фото (блок наши услуги)
 window.onload = function()
 {
-let img = document.getElementById ("zal1");
-let imgOne = document.getElementById ("zal2");
-let imgTwo = document.getElementById ("zal3");
-let imgTree = document.getElementById ("zal4");
+let img = document.getElementById ("bl1");
+let imgOne = document.getElementById ("bl2");
+let imgTwo = document.getElementById ("bl3");
+let imgTree = document.getElementById ("bl4");
 let old = img.src;
 let oldOne = imgOne.src;
 let oldTwo = imgTwo.src;
@@ -158,7 +123,7 @@ let zamenaTree = new Image();
 	})
 }
 	
-//отработка кнопки "Подробнее" (появление текста и скрытие по клику)
+//Отработка кнопки "Подробнее" (появление текста и скрытие по клику)
 let salesDiv = document.getElementById("sales");
 let butOne = document.getElementById("but1");
   function buy(){
@@ -194,156 +159,8 @@ function buyTree(){
 function cancelTree(){
 	sales3.innerHTML = '<input type="button4" value="Подробнее" onclick="buyTree()" />'
 	}	
-//video
-//доступ к элементам страницы
-let video = document.querySelector("video");
-let buttons = document.getElementsByClassName("dir");
-video.addEventListener("canplay",function(){
-	if 	(document.querySelector(".overlay"))
-		{	
-		document.querySelector(".overlay").remove();
-		}	
-	})
-//программируем кнопку play
-let playBut = document.querySelector(".play");
-playBut.addEventListener("click",function(){
-	if (video.paused)
-	{
-		video.play();
-	}
-	else
-	{
-		video.pause();
-	}
-})
-			
-//play и pause
-video.addEventListener("pause",function(){
-	playBut.classList.add("play");
-	playBut.classList.remove("pause");
-	video.currentTime = 0;
-})
-			
-video.addEventListener("play",function(){
-	playBut.classList.add("pause");
-	playBut.classList.remove("play");
-})
-			
-//переход на первый кадр
-let startBut = document.querySelector(".start");
-startBut.addEventListener("click",function(){
-	video.play();
-	video.currentTime = 0;
-})
-//если звук выключен, включаем его и наоборот.
-let muteButton = document.querySelector(".muteOn");
-muteButton.addEventListener("click",
-function(){
-	console.log(video.muted)
-		if (!video.muted)
-		{
-			this.classList.add("muteOff");
-			this.classList.remove("muteOn");
-			video.muted = true;
-		}
-		else{
-			this.classList.add("muteOn");
-			this.classList.remove("muteOff");
-			video.muted = false;
-				}
-}
-)
 
-let volumeButton = document.querySelector(".volume");
-volumeButton.addEventListener("click",
-	function(){
-		let volOfVideo = video.volume + video.diff;
-			if (volOfVideo >= 1)
-			{
-				volOfVideo = 1;
-				video.diff = -0.1;
-			}
-			if (volOfVideo <= 0)
-			{
-				volOfVideo = 0;
-				muteButton.classList.add("muteOff");
-				muteButton.classList.remove("muteOn");
-				video.diff = 0.1;
-			}
-			video.volume = volOfVideo;
-	}
-)
-video.diff = 0.1;
-//громкость звука
-video.addEventListener("volumechange", function(){
-})
-			
-//еще видео
-
-let btn = document.querySelector(".btn");
-let clip = document.querySelector(".clip");
-let closeOne = document.querySelector(".close");
-let vidOne = document.querySelector(".vidOne");
-btn.onclick = function(){
-	btn.classList.add("active");
-	clip.classList.add("active");
-	vidOne.play();
-	vidOne.currentTime = 0;
-}
-closeOne.onclick = function(){
-	btn.classList.remove("active");
-	clip.classList.remove("active");
-	vidOne.pause();
-}
-
-let btnTu = document.querySelector(".btnTu");
-let clipTu = document.querySelector(".clipTu");
-let closeTu = document.querySelector(".closeTu");
-let vidTu = document.querySelector(".vidTu");
-btnTu.onclick = function(){
-	btnTu.classList.add("active");
-	clipTu.classList.add("active");
-	vidTu.play();
-	vidTu.currentTime = 0;
-}
-closeTu.onclick = function(){
-	btnTu.classList.remove("active");
-	clipTu.classList.remove("active");
-	vidTu.pause();
-}
-let btnTru = document.querySelector(".btnTru");
-let clipTru = document.querySelector(".clipTru");
-let closeTru = document.querySelector(".closeTru");
-let vidTru = document.querySelector(".vidTru");
-btnTru.onclick = function(){
-	btnTru.classList.add("active");
-	clipTru.classList.add("active");
-	vidTru.play();
-	vidTru.currentTime = 0;
-}
-closeTru.onclick = function(){
-	btnTru.classList.remove("active");
-	clipTru.classList.remove("active");
-	vidTru.pause();
-}
-let btnFor = document.querySelector(".btnFor");
-let clipFor = document.querySelector(".clipFor");
-let closeFor = document.querySelector(".closeFor");
-let vidFor = document.querySelector(".vidFor");
-btnFor.onclick = function(){
-	btnFor.classList.add("active");
-	clipFor.classList.add("active");
-	vidFor.play();
-	vidFor.currentTime = 0;
-}
-closeFor.onclick = function(){
-	btnFor.classList.remove("active");
-	clipFor.classList.remove("active");
-	vidFor.pause();
-}
-
-//форма
-
+//Валидация формы
 function validate1(forma)
 {
 //удаляем все сообщения об ошибках при повторной отправке формы на сервер после исправления
